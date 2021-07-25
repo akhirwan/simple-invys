@@ -30,15 +30,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.min.css')?>">
 </head>
-<!--
-`body` tag options:
 
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed text-sm rounded-0">
 <div class="wrapper">
     <!-- Navbar -->
@@ -50,9 +42,9 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <?php if ($main_nav == 'Dashboard') {
-                    echo '<a href="'.base_url().'" class="nav-link">'.$main_nav.'</a>';
+                    echo '<a href="'.base_url().'dashboard'.'" class="nav-link">'.$main_nav.'</a>';
                 } else {
-                    echo '<a href="'.base_url().'backoffice" class="nav-link">'.$main_nav.'</a>';
+                    echo '<a href="'.base_url().'backoffice'.'" class="nav-link">'.$main_nav.'</a>';
                 }?>                
             </li>
             <li class="nav-item d-none d-sm-inline-block">

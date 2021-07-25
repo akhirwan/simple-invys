@@ -16,24 +16,32 @@
     </section>
     
     <section class="content">
+        <?php
+            if(isset($_GET['alert'])){
+                if($_GET['alert']=="success"){
+                    echo '<div class="alert alert-info alert-dismissible rounded-0" id="success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Add / Edit / Delete Item is success</div>';                    
+                }
+            }
+
+            $id = 0;
+        ?>
         <div class="card rounded-0">
             <div class="card-header">
-                <!-- <h3 class="card-title">List Items</h3> -->
-                <button class="btn btn-flat btn-outline-primary float-right" data-toggle="modal" data-target="#addItem">
+                <!-- <div class="btn-group">
+                    <button class="btn btn-flat btn-outline-secondary">
+                        Add Item
+                    </button>
+                    <button class="btn btn-flat btn-outline-secondary">
+                        Add Item
+                    </button>
+                    <button class="btn btn-flat btn-outline-secondary">
+                        Add Item
+                    </button>
+                </div> -->
+                <a href="<?php echo base_url().'store-item/0'?>" class="btn btn-flat btn-outline-primary float-right">
                     <i class="fas fa-folder-plus"></i> &nbsp;
                     Add Item
-                </button>
-                <div class="btn-group">
-                    <button class="btn btn-flat btn-outline-secondary">
-                        Add Item
-                    </button>
-                    <button class="btn btn-flat btn-outline-secondary">
-                        Add Item
-                    </button>
-                    <button class="btn btn-flat btn-outline-secondary">
-                        Add Item
-                    </button>
-                </div>
+                </a>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover text-nowrap">
@@ -57,7 +65,7 @@
                             echo '<tr><td colspan="10" style="text-align: center;"><b>No data to display<b></td></tr>';
                         } else {
                             $i = 1; foreach ($items as $item) {
-                                ?>
+                        ?>
 
                         <tr>
                             <td><?php echo $i++?></td>
@@ -70,10 +78,35 @@
                             <td><?php echo $item->sell_price?></td>
                             <td><?php echo $item->supplier_id?></td>
                             <td>
-                                <a href="" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>    
-                                <a href="" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-trash"></i></a>    
+                                <a href="<?php echo base_url().'store-item/'.$item->id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
+                                <!-- <a href="<?php //echo base_url().'delete-item/'.$item->id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-trash"></i></a> -->
+                                <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+
                             </td>
                         </tr>
+
+                        <!-- Modal -->
+                        <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content rounded-0">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Delete <?php echo $item->name?></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-flat" data-dismiss="modal">Close</button>
+                                        <a href="<?php echo base_url().'delete-item/'.$item->id?>" class="btn btn-danger btn-flat">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <?php
                             }
@@ -87,9 +120,11 @@
     </section>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <?php $this->load->view('item/add_view');?>
-    </div>
-</div>
+<script>
+    setTimeout(() => {
+        document.getElementById("success").style.display="none";
+    }, 5000);
+
+    desc = document.getElementById("description").value;
+    console.log(desc)
+</script>

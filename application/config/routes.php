@@ -56,7 +56,12 @@ $route['logout'] = 'Authentication/Logout';
 
 $route['dashboard'] = 'Dashboard';
 $route['customer'] = 'MasterData/Customers';
+
 $route['item'] = 'MasterData/Items';
+$route['store-item/(:any)'] = 'MasterData/Items/Write/$1';
+$route['insert-item'] = 'MasterData/Items/Action';
+$route['delete-item/(:any)'] = 'MasterData/Items/Remove/$1';
+
 $route['category'] = 'MasterData/Categories';
 $route['supplier'] = 'MasterData/Suppliers';
 
