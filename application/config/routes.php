@@ -59,11 +59,24 @@ $route['customer'] = 'MasterData/Customers';
 
 $route['item'] = 'MasterData/Items';
 $route['store-item/(:any)'] = 'MasterData/Items/Write/$1';
-$route['insert-item'] = 'MasterData/Items/Action';
+$route['submit-item'] = 'MasterData/Items/Action';
+$route['status-item/(:any)'] = 'MasterData/Items/Activate/$1';
 $route['delete-item/(:any)'] = 'MasterData/Items/Remove/$1';
+$route['destroy-item/(:any)'] = 'MasterData/Items/Destroy/$1';
 
 $route['category'] = 'MasterData/Categories';
+$route['store-category/(:any)'] = 'MasterData/Categories/Write/$1';
+$route['submit-category'] = 'MasterData/Categories/Action';
+$route['status-category/(:any)'] = 'MasterData/Categories/Activate/$1';
+$route['delete-category/(:any)'] = 'MasterData/Categories/Remove/$1';
+$route['destroy-category/(:any)'] = 'MasterData/Categories/Destroy/$1';
+
 $route['supplier'] = 'MasterData/Suppliers';
+$route['store-supplier/(:any)'] = 'MasterData/Suppliers/Write/$1';
+$route['submit-supplier'] = 'MasterData/Suppliers/Action';
+$route['status-supplier'] = 'MasterData/Suppliers/Activate';
+$route['delete-supplier/(:any)'] = 'MasterData/Suppliers/Remove/$1';
+$route['destroy-supplier/(:any)'] = 'MasterData/Suppliers/Destroy/$1';
 
 $route['report'] = 'Report/Reports';
 

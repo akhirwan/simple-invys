@@ -22,7 +22,7 @@
                     <?php
                         if(isset($_GET['alert'])){
                             if($_GET['alert']=="success"){
-                                echo '<div class="alert alert-info alert-dismissible rounded-0" id="success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Add / Edit / Delete Item is success</div>';                    
+                                echo '<div class="alert alert-info alert-dismissible rounded-0" id="success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Add / Edit / Delete Supplier is success</div>';                    
                             }
                         }
             
@@ -30,20 +30,9 @@
                     ?>
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <!-- <div class="btn-group">
-                                <button class="btn btn-flat btn-outline-secondary">
-                                    Add Item
-                                </button>
-                                <button class="btn btn-flat btn-outline-secondary">
-                                    Add Item
-                                </button>
-                                <button class="btn btn-flat btn-outline-secondary">
-                                    Add Item
-                                </button>
-                            </div> -->
-                            <a href="<?php echo base_url().'store-item/0'?>" class="btn btn-flat btn-outline-primary float-right">
+                            <a href="<?php echo base_url().'store-supplier/0'?>" class="btn btn-flat btn-outline-primary float-right">
                                 <i class="fas fa-folder-plus"></i> &nbsp;
-                                Add Item
+                                Add Supplier
                             </a>
                         </div>
                         <div class="card-body">
@@ -51,50 +40,47 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Stock</th>
-                                        <th>Category</th>
-                                        <th>Supplier</th>
+                                        <th>Company Name</th>
                                         <th>Status</th>
+                                        <th>PIC Name</th>
+                                        <th>Contact</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    if (!$items) {
+                                    if (!$suppliers) {
                                         echo '<tr><td colspan="10" style="text-align: center;"><b>No data to display<b></td></tr>';
                                     } else {
-                                        $i = 1; foreach ($items as $item) {
+                                        $i = 1; foreach ($suppliers as $sup) {
                                     ?>
             
                                     <tr>
                                         <td><?php echo $i++?></td>
-                                        <td><?php echo $item->item_code?></td>
-                                        <td><?php echo $item->item_name?></td>
-                                        <td><?php echo $item->item_stock?></td>
-                                        <td><?php echo $item->cat_name?></td>
-                                        <td><?php echo $item->sup_name?></td>
+                                        <td><?php echo $sup->sup_name?></td>
+                                        <!-- <td><?php //echo $sup->sup_is_active?></td> -->
                                         <td>
-                                            <form action="<?php echo base_url().'status-item/'.$item->item_id?>" method="post">
-                                            <?php 
-                                                if ($item->item_is_active == 1) {
-                                                    $act = '<input type="hidden" id="status" name="status" value="0" readonly>';
+                                            <form action="<?php echo base_url().'status-supplier'?>" id="form_status" method="post">
+                                            <?php
+                                                if ($sup->sup_is_active == 1) {
+                                                    $act = '<input type="hidden" value="'.$sup->sup_id.'" id="id" name="id" readonly>';
                                                     $act .= '<button type="submit" class="btn btn-xs btn-outline-primary btn-flat"><i class="fas fa-toggle-on"></i></button>';
-            
+
                                                     echo $act;
                                                 } else {
-                                                    $act = '<input type="hidden" id="status" name="status" value="1" readonly>';
+                                                    $act = '<input type="hidden" value="'.$sup->sup_id.'" id="id" name="id" readonly>';
                                                     $act .= '<button type="submit" class="btn btn-xs btn-outline-danger btn-flat"><i class="fas fa-toggle-off"></i></button>';
-            
+
                                                     echo $act;
                                                 }
-                                            ?>                                
-                                            </form>
+                                            ?>                                        
+                                            </form>                                            
                                         </td>
+                                        <td><?php echo $sup->first_name . ' ' . $sup->last_name?></td>
+                                        <td><?php echo $sup->phone?></td>
                                         <td>
-                                            <a href="<?php echo base_url().'store-item/'.$item->item_id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
-                                            <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#delItem<?php echo $item->item_id?>">
+                                            <a href="<?php echo base_url().'store-supplier/'.$sup->sup_id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
+                                            <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#delSup<?php echo $sup->sup_id?>">
                                                 <i class="fas fa-trash"></i>
                                             </button>
             
@@ -102,11 +88,11 @@
                                     </tr>
             
                                     <!-- Modal -->
-                                    <div class="modal fade bd-example-modal-sm" id="delItem<?php echo $item->item_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade bd-example-modal-sm" id="delSup<?php echo $sup->sup_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content rounded-0">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Delete <?php echo $item->item_name?></h5>
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Delete <?php echo $sup->sup_name?></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -116,7 +102,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-flat" data-dismiss="modal">Close</button>
-                                                    <a href="<?php echo base_url().'delete-item/'.$item->item_id?>" class="btn btn-danger btn-flat">Delete</a>
+                                                    <a href="<?php echo base_url().'delete-supplier/'.$sup->sup_id?>" class="btn btn-danger btn-flat">Delete</a>
                                                 </div>
                                             </div>
                                         </div>

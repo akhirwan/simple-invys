@@ -14,12 +14,23 @@ class Model_app extends CI_Model{
 		return $this->db->get_where($table, $where);
 	}
 	
+	function where_data($where, $table){
+		return $this->db->get_where($table, $where);
+	}
+	
 	function get_data($table){
 		return $this->db->get($table);
 	}
 	
 	function insert_data($data, $table){
 		$this->db->insert($table, $data);
+	}
+	
+	function insert_person($data, $table){
+		$this->db->insert($table, $data);
+		$insert_id = $this->db->insert_id();
+
+   		return $insert_id;
 	}
 	
 	function edit_data($where, $table){

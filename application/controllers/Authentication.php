@@ -23,24 +23,24 @@ class Authentication extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			$where = [
-				'username' 	=> $username,
-				'password' 	=> md5($password),
-				'is_active'	=> 1
+				'user_name' 		=> $username,
+				'user_password' 	=> md5($password),
+				'user_is_active'	=> 1
 			];
 
 			$this->load->model('Model_app');
-			$cek = $this->Model_app->cek_login('tbl_employees', $where)->row();
+			$cek = $this->Model_app->cek_login('tbl_users', $where)->row();
 
-			if (isset($cek->id)) {
+			if (isset($cek->user_id)) {
 				// var_dump($cek);die;
-				$check['id'] = $cek->person_id; 
+				$check['id'] = $cek->user_person_id; 
 				$data = $this->Model_app->cek_login('tbl_people', $check)->row();
 
 				if (isset($data)) {
 					$data_session = array(
 						'id'			=> $data->id,
 						'name'			=> $data->first_name . ' ' . $data->last_name,
-						'departement'	=> $cek->dept_id,
+						'departement'	=> $cek->user_dept_id,
 						'address'		=> $data->address,
 						'email'			=> $data->email,
 						'phone'			=> $data->phone,
