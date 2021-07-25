@@ -56,6 +56,11 @@ $route['logout'] = 'Authentication/Logout';
 
 $route['dashboard'] = 'Dashboard';
 $route['customer'] = 'MasterData/Customers';
+$route['store-customer/(:any)'] = 'MasterData/Customers/Write/$1';
+$route['submit-customer'] = 'MasterData/Customers/Action';
+$route['status-customer'] = 'MasterData/Customers/Activate';
+$route['delete-customer/(:any)'] = 'MasterData/Customers/Remove/$1';
+$route['destroy-customer/(:any)'] = 'MasterData/Customers/Destroy/$1';
 
 $route['item'] = 'MasterData/Items';
 $route['store-item/(:any)'] = 'MasterData/Items/Write/$1';

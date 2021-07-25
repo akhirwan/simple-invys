@@ -14,7 +14,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -30,9 +30,9 @@
                     ?>
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <a href="<?php echo base_url().'store-supplier/0'?>" class="btn btn-flat btn-outline-primary float-right">
+                            <a href="<?php echo base_url().'store-customer/0'?>" class="btn btn-flat btn-outline-primary float-right">
                                 <i class="fas fa-user-plus"></i> &nbsp;
-                                Add Supplier
+                                Add Customer
                             </a>
                         </div>
                         <div class="card-body">
@@ -40,34 +40,33 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Company Name</th>
+                                        <th>Name</th>
                                         <th>Status</th>
-                                        <th>PIC Name</th>
                                         <th>Contact</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    if (!$suppliers) {
+                                    if (!$customers) {
                                         echo '<tr><td colspan="10" style="text-align: center;"><b>No data to display<b></td></tr>';
                                     } else {
-                                        $i = 1; foreach ($suppliers as $sup) {
+                                        $i = 1; foreach ($customers as $cust) {
                                     ?>
             
                                     <tr>
                                         <td><?php echo $i++?></td>
-                                        <td><?php echo $sup->sup_name?></td>
+                                        <td><?php echo $cust->first_name . ' ' . $cust->last_name?></td>
                                         <td>
-                                            <form action="<?php echo base_url().'status-supplier'?>" id="form_status" method="post">
+                                            <form action="<?php echo base_url().'status-customer'?>" id="form_status" method="post">
                                             <?php
-                                                if ($sup->sup_is_active == 1) {
-                                                    $act = '<input type="hidden" value="'.$sup->sup_id.'" id="id" name="id" readonly>';
+                                                if ($cust->cust_is_active == 1) {
+                                                    $act = '<input type="hidden" value="'.$cust->cust_id.'" id="id" name="id" readonly>';
                                                     $act .= '<button type="submit" class="btn btn-xs btn-outline-primary btn-flat"><i class="fas fa-toggle-on"></i></button>';
 
                                                     echo $act;
                                                 } else {
-                                                    $act = '<input type="hidden" value="'.$sup->sup_id.'" id="id" name="id" readonly>';
+                                                    $act = '<input type="hidden" value="'.$cust->cust_id.'" id="id" name="id" readonly>';
                                                     $act .= '<button type="submit" class="btn btn-xs btn-outline-danger btn-flat"><i class="fas fa-toggle-off"></i></button>';
 
                                                     echo $act;
@@ -75,14 +74,13 @@
                                             ?>                                        
                                             </form>                                            
                                         </td>
-                                        <td><?php echo $sup->first_name . ' ' . $sup->last_name?></td>
                                         <td>
-                                            <i class="fas fa-phone"></i> <?php echo $sup->phone?> <br>
-                                            <i class="fas fa-envelope"></i> <?php echo $sup->email?> <br>
+                                            <i class="fas fa-phone"></i> <?php echo $cust->phone?> <br>
+                                            <i class="fas fa-envelope"></i> <?php echo $cust->email?> <br>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url().'store-supplier/'.$sup->sup_id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
-                                            <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#delSup<?php echo $sup->sup_id?>">
+                                            <a href="<?php echo base_url().'store-customer/'.$cust->cust_id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
+                                            <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#delCust<?php echo $cust->cust_id?>">
                                                 <i class="fas fa-trash"></i>
                                             </button>
             
@@ -90,11 +88,11 @@
                                     </tr>
             
                                     <!-- Modal -->
-                                    <div class="modal fade bd-example-modal-sm" id="delSup<?php echo $sup->sup_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade bd-example-modal-sm" id="delCust<?php echo $cust->cust_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content rounded-0">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Delete <?php echo $sup->sup_name?></h5>
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Delete <?php echo $cust->first_name?></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -104,7 +102,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-flat" data-dismiss="modal">Close</button>
-                                                    <a href="<?php echo base_url().'delete-supplier/'.$sup->sup_id?>" class="btn btn-danger btn-flat">Delete</a>
+                                                    <a href="<?php echo base_url().'delete-customer/'.$cust->cust_id?>" class="btn btn-danger btn-flat">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,9 +122,3 @@
         </div>
     </section>
 </div>
-
-<script>
-    setTimeout(() => {
-        document.getElementById("success").style.display="none";
-    }, 5000);
-</script>
