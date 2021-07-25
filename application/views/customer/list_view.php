@@ -82,8 +82,7 @@
                                             <a href="<?php echo base_url().'store-customer/'.$cust->cust_id?>" class="btn btn-xs btn-outline-secondary btn-flat"><i class="fas fa-edit"></i></a>
                                             <button type="button" class="btn btn-xs btn-outline-secondary btn-flat" data-toggle="modal" data-target="#delCust<?php echo $cust->cust_id?>">
                                                 <i class="fas fa-trash"></i>
-                                            </button>
-            
+                                            </button>            
                                         </td>
                                     </tr>
             
@@ -111,8 +110,7 @@
                                     <?php
                                         }
                                     }
-                                    ?>
-                                    
+                                    ?>                                    
                                 </tbody>
                             </table>
                         </div>

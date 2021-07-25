@@ -6,7 +6,8 @@ class Employees extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		// $this->load->model('Model_app');
+		$this->load->model('Model_app');
+		$this->load->model('Employee');
 	}
 
 	public function index()
@@ -14,14 +15,13 @@ class Employees extends CI_Controller {
 		$data['title'] = 'Employees Management';
 		$data['main_nav'] = 'Back Office';
 		$data['breadcrumb'] = 'Employees';
-		// $data['meta_keyword'] = $data['config']->app_name;
-		// $data['meta_description'] = $data['config']->company;
 		$data['active_employee'] = 'active';
 
+		$data['employees'] = $this->Employee->get_employee('0')->result();
+
 		$this->load->view('_templates/header', $data);
-		// $this->load->view('_templates/dashboard_nav', $data);
 		$this->load->view('_templates/backoffice_nav', $data);
-		$this->load->view('employee/index', $data);
+		$this->load->view('employee/list_view', $data);
 		$this->load->view('_templates/footer', $data);
 	}
 
