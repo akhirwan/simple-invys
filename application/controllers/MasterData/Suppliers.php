@@ -108,4 +108,18 @@ class Suppliers extends CI_Controller {
 		
 		redirect(base_url().'supplier?alert=success');
 	}
+
+	public function Remove($id) {
+		$data['sup_is_deleted'] = 1;
+		$data['sup_modified_at'] = date("Y-m-d h:i:s");
+		$data['sup_modified_by'] = $this->session->userdata('email');
+
+		$this->Model_app->update_data(['sup_id' => $id], $data, 'tbl_suppliers');
+        redirect(base_url().'supplier?alert=success');
+	}
+
+	public function Destroy($id) {
+		$this->Model_app->delete_data(['sup_id' => $id],'tbl_suppliers');
+        redirect(base_url().'supplier?alert=success');
+	}
 }
