@@ -1,6 +1,6 @@
 <?php
 class Model_app extends CI_Model{
-    function cek_login($table,$where){
+    function cek_login($table, $where){
 		return $this->db->get_where($table, $where);
 	}
 	
