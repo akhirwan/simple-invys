@@ -96,7 +96,7 @@
                                 <tbody>
                                     <?php 
                                     if (!$categories) {
-                                        echo '<tr><td colspan="10" style="text-align: center;"><b>No data to display<b></td></tr>';
+                                        echo '<tr><td colspan="6" style="text-align: center;"><div class="alert alert-info"><b>No data to display</b></div></td></tr>';
                                     } else {
                                         $i = 1; foreach ($categories as $cat) {
                                     ?>

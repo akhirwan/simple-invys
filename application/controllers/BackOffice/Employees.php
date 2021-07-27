@@ -18,6 +18,7 @@ class Employees extends CI_Controller {
 		$data['active_employee'] = 'active';
 
 		$data['employees'] = $this->Employee->get_employee('0')->result();
+		// $data['employees'] = [];
 
 		$this->load->view('_templates/header', $data);
 		$this->load->view('_templates/backoffice_nav', $data);

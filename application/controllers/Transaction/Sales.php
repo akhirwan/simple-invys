@@ -14,14 +14,11 @@ class Sales extends CI_Controller {
 		$data['title'] = 'Sales Management';
 		$data['main_nav'] = 'Dashboard';
 		$data['breadcrumb'] = 'Sales';
-		// $data['meta_keyword'] = $data['config']->app_name;
-		// $data['meta_description'] = $data['config']->company;
 		$data['active_sales'] = 'active';
 
 		$this->load->view('_templates/header', $data);
 		$this->load->view('_templates/dashboard_nav', $data);
-		// $this->load->view('_templates/backoffice_nav');
-		$this->load->view('sales/index', $data);
+		$this->load->view('sales/sales_view', $data);
 		$this->load->view('_templates/footer', $data);
 	}
 
